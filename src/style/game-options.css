@@ -13,8 +13,81 @@
     background-color: #FCFCFC;
     border-radius: 10px;
 }
+@media (min-width: 500px) {
+    .game-options-container {
+        width: 85%;
+        padding: 56px;
+        border-radius: 20px;
+    }
+}
+@media (min-width: 1280px) {
+    .game-options-container {
+        width: 45%;
+    }
+}
+
+.options-flex-wrapper {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
 
 .option-name {
     margin-bottom: 12px;
 }
+@media (min-width: 500px) {
+    .option-name {
+        font-size: 1.25rem;
+    }
+}
 
+.option-radio {
+    display: none;
+}
+
+.option-radio:checked + .option-label {
+    background-color: #304859;
+}
+
+.option-label {
+    cursor: pointer;
+    background-color: #BCCED9;
+    color: #FCFCFC;
+    border-radius: 25px;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+}
+@media (min-width: 500px) {
+    .option-label {
+        font-size: 1.625rem;
+    }
+}
+
+.option-label:hover,
+.option-label:focus {
+    background-color: #6395B8;
+}
+
+.start-button {
+    cursor: pointer;
+    padding: 12px 0;
+    width: 100%;
+    background-color: #FDA214;
+    color: #FCFCFC;
+    font-size: 1.125rem;
+    text-align: center;
+    border-radius: 25px;
+    border: none;
+}
+@media (min-width: 500px) {
+    .start-button {
+        font-size: 2rem;
+    }
+}
+
+.start-button:hover,
+.start-button:focus {
+    background-color: #FFB84A;
+}

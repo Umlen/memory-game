@@ -25,11 +25,9 @@ function App() {
     });
   }
 
-  console.log(gameOptions);
-
   return (
     <div>
-      {isGameStarted ? <Game /> : 
+      {isGameStarted ? <Game gameOptions={gameOptions} newGame={toggleGameState} /> : 
         <GameOptions 
           startGame={toggleGameState} 
           gameOptions={gameOptions} 
