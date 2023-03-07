@@ -1,14 +1,41 @@
 import { useState } from 'react';
-import './app.css';
+import './style/app.css';
 import GameOptions from './components/GameOptions';
 import Game from './components/Game';
 
 function App() {
   const [isGameStarted, setIsGameStarted] = useState(false);
-  
+  const [gameOptions, setGameOptions] = useState({
+    theme: 'numbers',
+    players: '1',
+    size: '4'
+  });
+
+  function toggleGameState() {
+    setIsGameStarted(prevIsGameStarted => !prevIsGameStarted);
+  }
+
+  function gameOptionsHandler(e) {
+    const {name, value} = e.target;
+    setGameOptions(prevGameOptions => {
+      return {
+        ...prevGameOptions,
+        [name]: value
+      };
+    });
+  }
+
+  console.log(gameOptions);
+
   return (
     <div>
-      {isGameStarted ? <Game /> : <GameOptions />}
+      {isGameStarted ? <Game /> : 
+        <GameOptions 
+          startGame={toggleGameState} 
+          gameOptions={gameOptions} 
+          gameOptionsHandler={gameOptionsHandler}
+        />
+      }
     </div>
   );
 }

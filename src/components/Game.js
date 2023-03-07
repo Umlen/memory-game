@@ -1,6 +1,6 @@
 function Game(props) {
     return (
-        <div>
+        <div className='container'>
             <h1>Game</h1>
         </div>
     )
