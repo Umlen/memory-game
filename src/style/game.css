@@ -1,0 +1,17 @@
+.game-container {
+    background-color: #FCFCFC;
+    justify-content: space-around;
+}
+
+.game-field {
+    display: grid;
+    gap: 12px;
+}
+
+.game-field-four {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.game-field-six {
+    grid-template-columns: repeat(6, 1fr);
+}

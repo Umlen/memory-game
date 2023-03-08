@@ -1,0 +1,25 @@
+.game-tile {
+    font-size: 1.5rem;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.closed-tile {
+    cursor: pointer;
+    background-color: #304859;
+    color: transparent;
+}
+
+.opened-tile {
+    background-color: #BCCED9;
+    color: #FCFCFC;
+}
+
+.tile-text {
+    line-height: 0;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}

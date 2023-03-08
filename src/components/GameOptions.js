@@ -5,7 +5,7 @@ function GameOptions(props) {
     const {theme, players, size} = props.gameOptions;
 
     return (
-        <div className='container'>
+        <div className='container options-container'>
             <object type='image/svg+xml' data={logo} className='options-page-logo' title='logo'></object>
             <div className='game-options-container'>
                 <p className='option-name'>Select Theme</p>
