@@ -6,21 +6,45 @@ import Tile from './Tile';
 function Game(props) {
     const {theme, players, size} = props.gameOptions;
     const iconsArray = [faCoffee, faSplotch, faCar, faHamburger, faBus, faFish, faBook, faCat, faBell, faDog, faDice, faGlobe, faHouse, faHeart, faDove, faTree, faFire, faSnowman];
-
+    const numbersArray = Array.from({length: 18}, (item, index) => index + 1);
+    
     function renderTiles() {
-        return createTilesArray().map((item, key) => (
-            <Tile key={key} tileText={item} />
-        ));
-    }    
-
-    function createTilesArray() {
         const arrayLength = size * size / 2;
-        const tilesArray = Array.from({length: arrayLength}, (item, index) => (
-            theme === 'numbers' ? index + 1 :
-            <FontAwesomeIcon icon={iconsArray[index]} />
+        const tilesArray = theme === 'numbers' ? 
+            createTilesNumbersArray(arrayLength) : 
+            createTilesIconsArray(arrayLength);
+        return tilesArray.map((tile, key) => (
+            <Tile key={key} tileObject={tile} />
         ));
-        return shuffleTilesArray(tilesArray.concat(tilesArray));
-    };
+    }   
+    
+    function createTilesNumbersArray(arrayLength) {
+        const tilesNumbersArray = [];
+        for (let i = 0; i < arrayLength; i++) {
+            tilesNumbersArray.push(
+                {
+                    data: numbersArray[i],
+                    isOpened: false,
+                    element: numbersArray[i]
+                }
+            );
+        }
+        return shuffleTilesArray(tilesNumbersArray.concat(tilesNumbersArray));
+    }
+
+    function createTilesIconsArray(arrayLength) {
+        const tilesIconsArray = [];
+        for (let i = 0; i < arrayLength; i++) {
+            tilesIconsArray.push(
+                {
+                    data: iconsArray[i].iconName,
+                    isOpened: false,
+                    element: <FontAwesomeIcon icon={iconsArray[i]} />
+                }
+            );
+        }
+        return shuffleTilesArray(tilesIconsArray.concat(tilesIconsArray));
+    }
 
     function shuffleTilesArray(tilesArray) {
         const tilesArrayLength = tilesArray.length;
@@ -45,7 +69,7 @@ function Game(props) {
                 New Game
             </button>
         </div>
-    )
+    );
 }
 
 export default Game;
