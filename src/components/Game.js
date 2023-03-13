@@ -1,22 +1,30 @@
 import '../style/game.css';
+import uuid from 'react-uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faSplotch, faCar, faHamburger, faBus, faFish, faBook, faCat, faBell, faDog, faDice, faGlobe, faHouse, faHeart, faDove, faTree, faFire, faSnowman } from '@fortawesome/free-solid-svg-icons';
-import Tile from './Tile';
+import Tiles from './Tiles';
 
 function Game(props) {
     const {theme, players, size} = props.gameOptions;
     const iconsArray = [faCoffee, faSplotch, faCar, faHamburger, faBus, faFish, faBook, faCat, faBell, faDog, faDice, faGlobe, faHouse, faHeart, faDove, faTree, faFire, faSnowman];
     const numbersArray = Array.from({length: 18}, (item, index) => index + 1);
-    
-    function renderTiles() {
+
+    function createTilesArray() {
         const arrayLength = size * size / 2;
-        const tilesArray = theme === 'numbers' ? 
+        const tiles = theme === 'numbers' ? 
             createTilesNumbersArray(arrayLength) : 
             createTilesIconsArray(arrayLength);
-        return tilesArray.map((tile, key) => (
-            <Tile key={key} tileObject={tile} />
-        ));
-    }   
+        return setId(tiles);
+    }
+
+    function setId(array) {
+        return array.map(item => {
+            return {
+                ...item,
+                id: uuid()
+            };
+        });
+    }
     
     function createTilesNumbersArray(arrayLength) {
         const tilesNumbersArray = [];
@@ -24,12 +32,12 @@ function Game(props) {
             tilesNumbersArray.push(
                 {
                     data: numbersArray[i],
-                    isOpened: false,
+                    tileStatus: 'closed',
                     element: numbersArray[i]
                 }
             );
         }
-        return shuffleTilesArray(tilesNumbersArray.concat(tilesNumbersArray));
+        return shuffleArray(tilesNumbersArray.concat(tilesNumbersArray));
     }
 
     function createTilesIconsArray(arrayLength) {
@@ -38,20 +46,20 @@ function Game(props) {
             tilesIconsArray.push(
                 {
                     data: iconsArray[i].iconName,
-                    isOpened: false,
+                    tileStatus: 'closed',
                     element: <FontAwesomeIcon icon={iconsArray[i]} />
                 }
             );
         }
-        return shuffleTilesArray(tilesIconsArray.concat(tilesIconsArray));
+        return shuffleArray(tilesIconsArray.concat(tilesIconsArray));
     }
 
-    function shuffleTilesArray(tilesArray) {
-        const tilesArrayLength = tilesArray.length;
+    function shuffleArray(array) {
+        const tilesArrayLength = array.length;
         const shuffledArray = [];
         for (let i = 0; i < tilesArrayLength; i++) {
-            const index = Math.floor(Math.random() * tilesArray.length);
-            shuffledArray.push(...tilesArray.splice(index, 1))
+            const index = Math.floor(Math.random() * array.length);
+            shuffledArray.push(...array.splice(index, 1))
         }
         return shuffledArray;
     }
@@ -60,7 +68,7 @@ function Game(props) {
         <div className='container game-container'>
             <h1>Game</h1>
             <div className={`game-field ${size === '4' ? 'game-field-four' : 'game-field-six'}`}>
-                {renderTiles()}
+                <Tiles tilesArray={createTilesArray()} />
             </div>
             <p>Theme: {theme}</p>
             <p>Players: {players}</p>

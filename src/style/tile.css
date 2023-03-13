@@ -16,6 +16,11 @@
     color: #FCFCFC;
 }
 
+.matched-tile {
+    background-color: #FDA214;
+    color: #FCFCFC;
+}
+
 .tile-text {
     line-height: 0;
     text-align: center;
