@@ -1,17 +1,69 @@
 .game-container {
     background-color: #FCFCFC;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 24px;
+}
+
+.game-page-header {
+    padding: 24px 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+@media(min-width: 700px) {
+    .game-page-header {
+        padding: 24px 40px 0;
+    }
+}
+@media(min-width: 1280px) {
+    .game-page-header {
+        padding: 24px 165px 0;
+    }
+}
+
+.restart-button {
+    margin-right: 16px;
 }
 
 .game-field {
+    width: 90%;
+    margin: auto;
     display: grid;
+    justify-content: space-between;
     gap: 12px;
+    aspect-ratio: 1;
+}
+@media(min-width: 700px) {
+    .game-field {
+        width: 75%;
+    }
+}
+@media(min-width: 1024px) {
+    .game-field {
+        width: 50%;
+    }
+}
+@media(min-width: 1280px) {
+    .game-field {
+        width: 30%;
+    }
+}
+@media(min-width: 1440px) {
+    .game-field {
+        width: 40%;
+    }
 }
 
 .game-field-four {
     grid-template-columns: repeat(4, 1fr);
 }
 
+
 .game-field-six {
     grid-template-columns: repeat(6, 1fr);
+}
+
+.players-board {
+    height: 100px;
 }

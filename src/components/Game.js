@@ -1,13 +1,25 @@
-import '../style/game.css';
+import { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faSplotch, faCar, faHamburger, faBus, faFish, faBook, faCat, faBell, faDog, faDice, faGlobe, faHouse, faHeart, faDove, faTree, faFire, faSnowman } from '@fortawesome/free-solid-svg-icons';
+import '../style/game.css';
+import logo from '../images/dark-logo.svg';
 import Tiles from './Tiles';
 
 function Game(props) {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const mobileWidthBreakpoint = 500;
     const {theme, players, size} = props.gameOptions;
     const iconsArray = [faCoffee, faSplotch, faCar, faHamburger, faBus, faFish, faBook, faCat, faBell, faDog, faDice, faGlobe, faHouse, faHeart, faDove, faTree, faFire, faSnowman];
     const numbersArray = Array.from({length: 18}, (item, index) => index + 1);
+    
+    useEffect(() => {
+        function resizeWindowHandler() {
+            setWindowWidth(window.innerWidth);
+        }
+        window.addEventListener('resize', resizeWindowHandler);
+        return(() => window.removeEventListener('resize', resizeWindowHandler));
+    }, []);
 
     function createTilesArray() {
         const arrayLength = size * size / 2;
@@ -16,16 +28,7 @@ function Game(props) {
             createTilesIconsArray(arrayLength);
         return setId(tiles);
     }
-
-    function setId(array) {
-        return array.map(item => {
-            return {
-                ...item,
-                id: uuid()
-            };
-        });
-    }
-    
+   
     function createTilesNumbersArray(arrayLength) {
         const tilesNumbersArray = [];
         for (let i = 0; i < arrayLength; i++) {
@@ -64,18 +67,32 @@ function Game(props) {
         return shuffledArray;
     }
 
+    function setId(array) {
+        return array.map(item => {
+            return {
+                ...item,
+                id: uuid()
+            };
+        });
+    }
+
     return (
         <div className='container game-container'>
-            <h1>Game</h1>
+            <header className='game-page-header'>
+                <object type='image/svg+xml' data={logo} title='logo'></object>
+                {windowWidth < mobileWidthBreakpoint ? <button className='basic-button orange-button'>Menu</button> :
+                    <div>
+                        <button className='basic-button orange-button restart-button'>Restart</button>
+                        <button className='basic-button gray-button' onClick={props.newGame}>New Game</button>
+                    </div>
+                }
+            </header>
             <div className={`game-field ${size === '4' ? 'game-field-four' : 'game-field-six'}`}>
                 <Tiles tilesArray={createTilesArray()} />
             </div>
-            <p>Theme: {theme}</p>
-            <p>Players: {players}</p>
-            <p>Size: {size}</p>
-            <button onClick={props.newGame}>
-                New Game
-            </button>
+            <div className='players-board'>
+                <h1>{players}</h1>
+            </div>
         </div>
     );
 }

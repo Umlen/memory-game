@@ -99,7 +99,7 @@ function GameOptions(props) {
                     />
                     <label htmlFor='size-six' className='option-label'>6x6</label>
                 </div>
-                <button onClick={props.startGame} className='start-button'>
+                <button onClick={props.startGame} className='basic-button orange-button start-button'>
                     Start Game
                 </button>
             </div>

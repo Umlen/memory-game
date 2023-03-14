@@ -1,8 +1,15 @@
 .game-tile {
     font-size: 1.5rem;
-    width: 45px;
-    height: 45px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
+    aspect-ratio: 1;
+}
+@media(min-width: 700px) {
+    .game-tile {
+        max-width: 110px;
+        max-height: 110px;
+    }
 }
 
 .closed-tile {
@@ -23,8 +30,19 @@
 
 .tile-text {
     line-height: 0;
+    font-size: 1.5rem;
     text-align: center;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+}
+@media(min-width: 700px) {
+    .tile-text {
+        font-size: 3.5rem;
+    }
+}
+@media(min-width: 1280px) {
+    .tile-text {
+        font-size: 2.5rem;
+    }
 }
