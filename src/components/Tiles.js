@@ -5,6 +5,7 @@ function Tiles(props) {
     const [tiles, setTiles] = useState(props.tilesArray);;
 
     function tileOpeningHandler(e) {
+        props.timerToggler();
         if (countOpenedTiles(tiles) < 2) {
             const currentId = e.currentTarget.id;
             const newTilesArray = tiles.map(tile => {
@@ -20,6 +21,7 @@ function Tiles(props) {
             setTiles(newTilesArray);
             if (countOpenedTiles(newTilesArray) === 2) {
                 tilesCheck(newTilesArray);
+                props.movesCounting();
             }
         } 
     }
@@ -33,7 +35,6 @@ function Tiles(props) {
         setTimeout(function() {
             const openedTilesArray = tilesArray.filter(tile =>tile.tileStatus === 'opened');
             if (openedTilesArray[0].data === openedTilesArray[1].data) {
-                console.log('true');
                 const newTilesArray = tilesArray.map(tile => {
                     if (tile.tileStatus === 'opened') {
                         return {
@@ -45,8 +46,8 @@ function Tiles(props) {
                     }
                 });
                 setTiles(newTilesArray);
+                props.timerToggler(onePlayerEndGame(newTilesArray));
             } else {
-                console.log('false');
                 const newTilesArray = tilesArray.map(tile => {
                     if (tile.tileStatus === 'opened') {
                         return {
@@ -60,6 +61,11 @@ function Tiles(props) {
                 setTiles(newTilesArray);
             }
         }, 1000);
+    }
+
+    function onePlayerEndGame(tilesArray) {
+        const openedTilesArray = tilesArray.filter(tile => tile.tileStatus === 'closed');
+        return openedTilesArray.length === 0;
     }
 
     return (

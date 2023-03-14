@@ -63,7 +63,3 @@
 .game-field-six {
     grid-template-columns: repeat(6, 1fr);
 }
-
-.players-board {
-    height: 100px;
-}

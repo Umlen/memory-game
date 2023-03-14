@@ -1,0 +1,42 @@
+.players-board {
+    width: 90%;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+@media (min-width: 700px) {
+    .players-board {
+        width: 70%;
+    }
+}
+@media (min-width: 1280px) {
+    .players-board {
+        width: 35%;
+    }
+}
+
+.player-wrapper {
+    background-color: #DFE7EC;
+    color: #7191A5;
+    border-radius: 5px;
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+@media (min-width: 700px) {
+    .player-wrapper {
+        padding: 20px 0;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+.player-stats {
+    font-size: 1.5rem;
+    color: #304859;
+}

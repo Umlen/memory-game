@@ -5,10 +5,13 @@ import { faCoffee, faSplotch, faCar, faHamburger, faBus, faFish, faBook, faCat, 
 import '../style/game.css';
 import logo from '../images/dark-logo.svg';
 import Tiles from './Tiles';
+import OnePlayer from './OnePlayer';
 
 function Game(props) {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const mobileWidthBreakpoint = 500;
+    const [moves, setMoves] = useState(0);
+    const [isTimerOn, setIsTimerOn] = useState(false);
     const {theme, players, size} = props.gameOptions;
     const iconsArray = [faCoffee, faSplotch, faCar, faHamburger, faBus, faFish, faBook, faCat, faBell, faDog, faDice, faGlobe, faHouse, faHeart, faDove, faTree, faFire, faSnowman];
     const numbersArray = Array.from({length: 18}, (item, index) => index + 1);
@@ -76,6 +79,18 @@ function Game(props) {
         });
     }
 
+    function movesCounting() {
+        setMoves(prevMoves => prevMoves + 1);
+    }
+
+    function timerToggler(isGameEnd) {
+        if (!isTimerOn) {
+            setIsTimerOn(true);
+        } else if (isGameEnd) {
+            setIsTimerOn(false);
+        }
+    }
+
     return (
         <div className='container game-container'>
             <header className='game-page-header'>
@@ -88,11 +103,13 @@ function Game(props) {
                 }
             </header>
             <div className={`game-field ${size === '4' ? 'game-field-four' : 'game-field-six'}`}>
-                <Tiles tilesArray={createTilesArray()} />
+                <Tiles 
+                    tilesArray={createTilesArray()} 
+                    movesCounting={movesCounting} 
+                    timerToggler={timerToggler}
+                />
             </div>
-            <div className='players-board'>
-                <h1>{players}</h1>
-            </div>
+            {players === '1' ? <OnePlayer moves={moves} timerState={isTimerOn} /> : ''}
         </div>
     );
 }
