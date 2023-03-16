@@ -10,13 +10,13 @@ function Game(props) {
     const mobileWidthBreakpoint = 500;
 
     const {theme, players, size} = props.gameOptions;
-    const [tilesArray, setTilesArray] = useState([]);
-    const [isGameOn, setIsGameOn] = useState(false);
+    const [tiles, setTiles] = useState([]);
+    const [isGameEnd, setIsGameEnd] = useState(false);
     const [isTimerOn, setIsTimerOn] = useState(false);
     const [moves, setMoves] = useState(0);
 
     useEffect(() => {
-        setTilesArray(createTilesArray(theme, size));
+        setTiles(createTilesArray(theme, size));
     }, []);
    
     useEffect(() => {
@@ -28,13 +28,18 @@ function Game(props) {
     }, []);
 
     function tileOpeningHandler(e) {
-        if (countOpenedTiles(tilesArray) === 0) {
-            setTilesArray(openOneTile(e.currentTarget.id));
-        } else if (countOpenedTiles(tilesArray) === 1) {
+        if (moves === 0 && !isTimerOn) {
+            timerToggler();
+        }
+        if (countOpenedTiles(tiles) === 0) {
+            setTiles(openOneTile(e.currentTarget.id));
+        } else if (countOpenedTiles(tiles) === 1) {
             const openedTiles = openOneTile(e.currentTarget.id);
-            setTilesArray(openedTiles);
-            const checkedTiles = tilesCheck(openedTiles);
-            setTimeout(() => setTilesArray(checkedTiles), 1000);
+            setTiles(openedTiles);
+            setTimeout(() => {
+                setTiles(tilesCheck(openedTiles));
+                gameEndingCheck(openedTiles);
+            }, 500);
         }
     }
 
@@ -44,7 +49,7 @@ function Game(props) {
     }
 
     function openOneTile(currentId) {
-        return tilesArray.map(tile => {
+        return tiles.map(tile => {
             if (tile.id === currentId) {
                 return {
                     ...tile, 
@@ -58,7 +63,7 @@ function Game(props) {
 
     function tilesCheck(tilesArray) {
         movesCounting();
-        const openedTilesArray = tilesArray.filter(tile =>tile.tileStatus === 'opened');
+        const openedTilesArray = tilesArray.filter(tile => tile.tileStatus === 'opened');
         if (openedTilesArray[0].data === openedTilesArray[1].data) {
             return tilesArray.map(tile => {
                 if (tile.tileStatus === 'opened') {
@@ -88,11 +93,15 @@ function Game(props) {
         setMoves(prevMoves => prevMoves + 1);
     }
 
-    function timerToggler(isGameEnd) {
-        if (!isTimerOn) {
-            setIsTimerOn(true);
-        } else if (isGameEnd) {
-            setIsTimerOn(false);
+    function timerToggler() {
+        isTimerOn ? setIsTimerOn(false) : setIsTimerOn(true);
+    }
+
+    function gameEndingCheck(tilesArray) {
+        const matchedTilesArray = tilesArray.filter(tile => tile.tileStatus === 'closed');
+        if (matchedTilesArray.length === 0) {
+            setIsGameEnd(true);
+            timerToggler();
         }
     }
 
@@ -109,11 +118,20 @@ function Game(props) {
             </header>
             <div className={`game-field ${size === '4' ? 'game-field-four' : 'game-field-six'}`}>
                 <Tiles 
-                    tilesArray={tilesArray} 
+                    tilesArray={tiles} 
                     openingHandler={tileOpeningHandler}
                 />
             </div>
-            {players === '1' ? <SinglePlayer moves={moves} timerState={isTimerOn} newGame={props.newGame} /> : ''}
+            {
+                players === '1' ? 
+                    <SinglePlayer 
+                        isGameEnd={isGameEnd}
+                        moves={moves} 
+                        timerState={isTimerOn} 
+                        newGame={props.newGame} 
+                    /> 
+                : ''
+            }
         </div>
     );
 }

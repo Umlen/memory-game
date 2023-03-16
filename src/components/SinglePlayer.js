@@ -3,14 +3,13 @@ import '../style/players.css';
 import SinglePlayerEndGame from './SinglePlayerEndGame';
 
 function SinglePlayer(props) {
-    const [isGameEnd, setIsGameEnd] = useState(false);
     const [timer, setTimer] = useState('0:00');
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
 
     useEffect(    
         function timeCounting() {
-            if(props.timerState) {
+            if (props.timerState) {
                 setTimeout(() => {
                     const min = minutes + Math.floor((seconds + 1) / 60);
                     const sec = Math.round((seconds + 1) % 60);
@@ -18,8 +17,6 @@ function SinglePlayer(props) {
                     setMinutes(min);
                     setTimer(`${min}:${sec < 10 ? '0' + sec : sec}`);
                 }, 1000);
-            } else if (timer !== '0:00') {
-                setIsGameEnd(true);
             }
         }, 
     [props.timerState, timer]);
@@ -27,7 +24,13 @@ function SinglePlayer(props) {
     return (
         <div className='players-board'>
             {
-                isGameEnd ? <SinglePlayerEndGame timer={timer} moves={props.moves} newGame={props.newGame} /> : ''
+                props.isGameEnd ? 
+                    <SinglePlayerEndGame 
+                        timer={timer} 
+                        moves={props.moves} 
+                        newGame={props.newGame} 
+                    /> 
+                : ''
             }
             <div className='player-wrapper'>
                 <p>Timer</p>
