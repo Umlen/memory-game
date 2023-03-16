@@ -1,6 +1,6 @@
 import '../style/players.css';
 
-function OnePlayerEndGame(props) {
+function SinglePlayerEndGame(props) {
     return (
         <div className='blackout'>
             <div className='end-game-block'>
@@ -23,4 +23,4 @@ function OnePlayerEndGame(props) {
     );
 }
 
-export default OnePlayerEndGame;
+export default SinglePlayerEndGame;

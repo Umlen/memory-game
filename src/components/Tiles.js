@@ -1,8 +1,12 @@
 import '../style/tile.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Tiles(props) {
-    const [tiles, setTiles] = useState(props.tilesArray);;
+    const [tiles, setTiles] = useState([]);
+
+    useEffect(() => {
+        setTiles(props.tilesArray);
+    }, [props.tilesArray]);
 
     function tileOpeningHandler(e) {
         props.timerToggler();

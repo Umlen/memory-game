@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import '../style/players.css';
-import OnePlayerEndGame from './OnePlayerEndGame';
+import SinglePlayerEndGame from './SinglePlayerEndGame';
 
-function OnePlayer(props) {
+function SinglePlayer(props) {
     const [isGameEnd, setIsGameEnd] = useState(false);
     const [timer, setTimer] = useState('0:00');
     const [seconds, setSeconds] = useState(0);
@@ -27,7 +27,7 @@ function OnePlayer(props) {
     return (
         <div className='players-board'>
             {
-                isGameEnd ? <OnePlayerEndGame timer={timer} moves={props.moves} newGame={props.newGame} /> : ''
+                isGameEnd ? <SinglePlayerEndGame timer={timer} moves={props.moves} newGame={props.newGame} /> : ''
             }
             <div className='player-wrapper'>
                 <p>Timer</p>
@@ -41,4 +41,4 @@ function OnePlayer(props) {
     );
 }
 
-export default OnePlayer;
+export default SinglePlayer;
