@@ -109,7 +109,7 @@ function Game(props) {
                     timerToggler={timerToggler}
                 />
             </div>
-            {players === '1' ? <OnePlayer moves={moves} timerState={isTimerOn} /> : ''}
+            {players === '1' ? <OnePlayer moves={moves} timerState={isTimerOn} newGame={props.newGame} /> : ''}
         </div>
     );
 }
