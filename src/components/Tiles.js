@@ -8,70 +8,6 @@ function Tiles(props) {
         setTiles(props.tilesArray);
     }, [props.tilesArray]);
 
-    function tileOpeningHandler(e) {
-        props.timerToggler();
-        if (countOpenedTiles(tiles) < 2) {
-            const currentId = e.currentTarget.id;
-            const newTilesArray = tiles.map(tile => {
-                if (tile.id === currentId) {
-                    return {
-                        ...tile, 
-                        tileStatus: 'opened',
-                    };
-                } else {
-                    return tile;
-                }
-            });
-            setTiles(newTilesArray);
-            if (countOpenedTiles(newTilesArray) === 2) {
-                tilesCheck(newTilesArray);
-                props.movesCounting();
-            }
-        } 
-    }
-
-    function countOpenedTiles(tilesArray) {
-        const openedTilesArray = tilesArray.filter(tile => tile.tileStatus === 'opened');
-        return openedTilesArray.length;
-    }
-
-    function tilesCheck(tilesArray) {
-        setTimeout(function() {
-            const openedTilesArray = tilesArray.filter(tile =>tile.tileStatus === 'opened');
-            if (openedTilesArray[0].data === openedTilesArray[1].data) {
-                const newTilesArray = tilesArray.map(tile => {
-                    if (tile.tileStatus === 'opened') {
-                        return {
-                            ...tile, 
-                            tileStatus: 'matched',
-                        };
-                    } else {
-                        return tile;
-                    }
-                });
-                setTiles(newTilesArray);
-                props.timerToggler(onePlayerEndGame(newTilesArray));
-            } else {
-                const newTilesArray = tilesArray.map(tile => {
-                    if (tile.tileStatus === 'opened') {
-                        return {
-                            ...tile, 
-                            tileStatus: 'closed',
-                        };
-                    } else {
-                        return tile;
-                    }
-                });
-                setTiles(newTilesArray);
-            }
-        }, 1000);
-    }
-
-    function onePlayerEndGame(tilesArray) {
-        const openedTilesArray = tilesArray.filter(tile => tile.tileStatus === 'closed');
-        return openedTilesArray.length === 0;
-    }
-
     return (
         tiles.map((tile, key) => {
             if (tile.tileStatus === 'opened') {
@@ -96,7 +32,7 @@ function Tiles(props) {
                         key={key} 
                         className='game-tile closed-tile' 
                         id={tile.id} 
-                        onClick={(e) => tileOpeningHandler(e, tiles)}
+                        onClick={(e) => props.openingHandler(e)}
                     >
                         <p className='tile-text'>{tile.element}</p>
                     </div>
