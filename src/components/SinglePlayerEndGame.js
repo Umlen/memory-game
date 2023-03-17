@@ -15,8 +15,12 @@ function SinglePlayerEndGame(props) {
                     <p className='player-stats'>{props.moves} Moves</p>
                 </div>
                 <div className='buttons-wrapper'>
-                    <button className='basic-button orange-button restart-button'>Restart</button>
-                    <button className='basic-button gray-button' onClick={props.newGame}>Setup New Game</button>
+                    <button className='basic-button orange-button restart-button'>
+                        Restart
+                    </button>
+                    <button className='basic-button gray-button' onClick={props.newGame}>
+                        Setup New Game
+                    </button>
                 </div>
             </div>
         </div>

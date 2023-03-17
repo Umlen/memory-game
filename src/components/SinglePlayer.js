@@ -24,13 +24,12 @@ function SinglePlayer(props) {
     return (
         <div className='players-board'>
             {
-                props.isGameEnd ? 
-                    <SinglePlayerEndGame 
-                        timer={timer} 
-                        moves={props.moves} 
-                        newGame={props.newGame} 
-                    /> 
-                : ''
+                props.isGameEnd && 
+                <SinglePlayerEndGame 
+                    timer={timer} 
+                    moves={props.moves} 
+                    newGame={props.newGame} 
+                /> 
             }
             <div className='player-wrapper'>
                 <p>Timer</p>

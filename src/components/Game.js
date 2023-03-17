@@ -4,6 +4,7 @@ import logo from '../images/dark-logo.svg';
 import createTilesArray from '../utils/createTilesArray';
 import Tiles from './Tiles';
 import SinglePlayer from './SinglePlayer';
+import MobileMenu from './MobileMenu';
 
 function Game(props) {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -11,10 +12,12 @@ function Game(props) {
 
     const {theme, players, size} = props.gameOptions;
     const [tiles, setTiles] = useState([]);
+    const [isGameStart, setIsGameStart] = useState(false);
     const [isGameEnd, setIsGameEnd] = useState(false);
     const [isTimerOn, setIsTimerOn] = useState(false);
+    const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
     const [moves, setMoves] = useState(0);
-
+    
     useEffect(() => {
         setTiles(createTilesArray(theme, size));
     }, []);
@@ -30,6 +33,7 @@ function Game(props) {
     function tileOpeningHandler(e) {
         if (moves === 0 && !isTimerOn) {
             timerToggler();
+            setIsGameStart(true);
         }
         if (countOpenedTiles(tiles) === 0) {
             setTiles(openOneTile(e.currentTarget.id));
@@ -94,7 +98,7 @@ function Game(props) {
     }
 
     function timerToggler() {
-        isTimerOn ? setIsTimerOn(false) : setIsTimerOn(true);
+        setIsTimerOn(prevTimerState => !prevTimerState);
     }
 
     function gameEndingCheck(tilesArray) {
@@ -105,17 +109,40 @@ function Game(props) {
         }
     }
 
+    function mobileMenuHandler() {
+        const mobileMenuState = isMobileMenuOpened ? false : true;
+        if (isGameStart) {
+            timerToggler();
+        }
+        setIsMobileMenuOpened(mobileMenuState);
+    }
+
     return (
         <div className='container game-container'>
             <header className='game-page-header'>
                 <object type='image/svg+xml' data={logo} title='logo'></object>
-                {windowWidth < mobileWidthBreakpoint ? <button className='basic-button orange-button'>Menu</button> :
-                    <div>
-                        <button className='basic-button orange-button restart-button'>Restart</button>
-                        <button className='basic-button gray-button' onClick={props.newGame}>New Game</button>
-                    </div>
+                {
+                    windowWidth < mobileWidthBreakpoint ? 
+                        <button className='basic-button orange-button' onClick={mobileMenuHandler}>
+                            Menu
+                        </button> :
+                        <div>
+                            <button className='basic-button orange-button restart-button'>
+                                Restart
+                            </button>
+                            <button className='basic-button gray-button' onClick={props.newGame}>
+                                New Game
+                            </button>
+                        </div>
                 }
             </header>
+            {
+                isMobileMenuOpened && 
+                <MobileMenu 
+                    newGame={props.newGame} 
+                    resumeGame={mobileMenuHandler} 
+                /> 
+            }
             <div className={`game-field ${size === '4' ? 'game-field-four' : 'game-field-six'}`}>
                 <Tiles 
                     tilesArray={tiles} 
@@ -125,6 +152,7 @@ function Game(props) {
             {
                 players === '1' ? 
                     <SinglePlayer 
+                        isGameStart={isGameStart}
                         isGameEnd={isGameEnd}
                         moves={moves} 
                         timerState={isTimerOn} 
