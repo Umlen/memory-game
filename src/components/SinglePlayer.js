@@ -17,9 +17,13 @@ function SinglePlayer(props) {
                     setMinutes(min);
                     setTimer(`${min}:${sec < 10 ? '0' + sec : sec}`);
                 }, 1000);
+            } else if (!props.isGameStart && timer !== '0:00') {
+                setTimer('0:00');
+                setSeconds(0);
+                setMinutes(0);
             }
         }, 
-    [props.timerState, timer]);
+    [props.timerState, props.isGameStart, timer]);
 
     return (
         <div className='players-board'>
@@ -29,6 +33,7 @@ function SinglePlayer(props) {
                     timer={timer} 
                     moves={props.moves} 
                     newGame={props.newGame} 
+                    restartGame={props.restartGame}
                 /> 
             }
             <div className='player-wrapper'>

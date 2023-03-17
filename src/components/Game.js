@@ -117,6 +117,21 @@ function Game(props) {
         setIsMobileMenuOpened(mobileMenuState);
     }
 
+    function restartGame() {
+        const closedTiles = tiles.map(tile => {
+            return {
+                ...tile, 
+                tileStatus: 'closed',
+            };
+        });
+        setTiles(closedTiles);
+        setIsGameStart(false);
+        setIsGameEnd(false);
+        setIsTimerOn(false);
+        setIsMobileMenuOpened(false);
+        setMoves(0);
+    }
+
     return (
         <div className='container game-container'>
             <header className='game-page-header'>
@@ -127,7 +142,7 @@ function Game(props) {
                             Menu
                         </button> :
                         <div>
-                            <button className='basic-button orange-button restart-button'>
+                            <button className='basic-button orange-button restart-button' onClick={restartGame}>
                                 Restart
                             </button>
                             <button className='basic-button gray-button' onClick={props.newGame}>
@@ -141,6 +156,7 @@ function Game(props) {
                 <MobileMenu 
                     newGame={props.newGame} 
                     resumeGame={mobileMenuHandler} 
+                    restartGame={restartGame}
                 /> 
             }
             <div className={`game-field ${size === '4' ? 'game-field-four' : 'game-field-six'}`}>
@@ -157,6 +173,7 @@ function Game(props) {
                         moves={moves} 
                         timerState={isTimerOn} 
                         newGame={props.newGame} 
+                        restartGame={restartGame}
                     /> 
                 : ''
             }

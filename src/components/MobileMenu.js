@@ -2,7 +2,7 @@ function MobileMenu(props) {
     return(
         <div className='blackout'>
             <div className='mobile-menu'>
-                <button className='basic-button orange-button restart-button'>
+                <button className='basic-button orange-button restart-button' onClick={props.restartGame}>
                     Restart
                 </button>
                 <button className='basic-button gray-button' onClick={props.newGame}>
