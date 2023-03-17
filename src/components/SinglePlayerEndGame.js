@@ -1,4 +1,4 @@
-import '../style/players.css';
+import '../style/singleplayer.css';
 
 function SinglePlayerEndGame(props) {
     return (

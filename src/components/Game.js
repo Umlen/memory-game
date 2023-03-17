@@ -4,6 +4,7 @@ import logo from '../images/dark-logo.svg';
 import createTilesArray from '../utils/createTilesArray';
 import Tiles from './Tiles';
 import SinglePlayer from './SinglePlayer';
+import MultiPlayer from './MultiPlayer';
 import MobileMenu from './MobileMenu';
 
 function Game(props) {
@@ -175,7 +176,16 @@ function Game(props) {
                         newGame={props.newGame} 
                         restartGame={restartGame}
                     /> 
-                : ''
+                : 
+                    <MultiPlayer 
+                        isGameStart={isGameStart}
+                        isGameEnd={isGameEnd}
+                        players={players} 
+                        newGame={props.newGame} 
+                        restartGame={restartGame}
+                        mobileWidthBreakpoint={mobileWidthBreakpoint}
+                        windowWidth={windowWidth}
+                    />
             }
         </div>
     );

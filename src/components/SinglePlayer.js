@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import '../style/players.css';
+import '../style/singleplayer.css';
 import SinglePlayerEndGame from './SinglePlayerEndGame';
 
 function SinglePlayer(props) {
