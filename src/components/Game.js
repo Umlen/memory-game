@@ -18,6 +18,7 @@ function Game(props) {
     const [isTimerOn, setIsTimerOn] = useState(false);
     const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
     const [moves, setMoves] = useState(0);
+    const [pairs, setPairs] = useState(0);
     
     useEffect(() => {
         setTiles(createTilesArray(theme, size));
@@ -70,6 +71,7 @@ function Game(props) {
         movesCounting();
         const openedTilesArray = tilesArray.filter(tile => tile.tileStatus === 'opened');
         if (openedTilesArray[0].data === openedTilesArray[1].data) {
+            setPairs(pairs + 1);
             return tilesArray.map(tile => {
                 if (tile.tileStatus === 'opened') {
                     return {
@@ -181,6 +183,8 @@ function Game(props) {
                         isGameStart={isGameStart}
                         isGameEnd={isGameEnd}
                         players={players} 
+                        moves={moves} 
+                        pairs={pairs}
                         newGame={props.newGame} 
                         restartGame={restartGame}
                         mobileWidthBreakpoint={mobileWidthBreakpoint}

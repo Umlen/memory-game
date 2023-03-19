@@ -14,6 +14,7 @@
 @media(min-width: 1280px) {
     .players-wrapper {
         padding: 0 165px;
+        margin-bottom: 50px;
     }
 }
 
@@ -44,12 +45,54 @@
     }
 }
 
-.active-player {
-    background-color: #FDA214;
-    color: #FCFCFC;
-}
-
 .player-stats {
     font-size: 1.5rem;
     color: #304859;
+}
+
+.active-player {
+    background-color: #FDA214;
+    color: #FCFCFC;
+    position: relative;
+}
+
+.active-player:before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    background-color: #FDA214;
+}
+@media(min-width: 500px) {
+    .active-player:before {
+        width: 12px;
+        height: 12px;
+        top: -6px;
+    }
+}
+@media(min-width: 1024px) {
+    .active-player:before {
+        width: 20px;
+        height: 20px;
+        top: -10px;
+    }
+    .active-player:after {
+        content: "current turn";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        bottom: -25px;
+        color: #152938;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        font-size: .8rem;
+    }
+}
+
+.active-player .player-stats {
+    color: #FCFCFC;
 }
