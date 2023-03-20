@@ -31,13 +31,13 @@
 }
 @media (min-width: 700px) {
     .player-wrapper {
+        font-size: 1.125rem;
         padding: 15px;
         align-items: flex-start;
     }
 }
 @media (min-width: 1024px) {
     .player-wrapper {
-        max-width: 250px;
         padding: 20px 25px;
         align-items: center;
         flex-direction: row;
@@ -54,6 +54,16 @@
     background-color: #FDA214;
     color: #FCFCFC;
     position: relative;
+}
+
+.active-player .player-stats,
+.player-winner .player-stats {
+    color: #FCFCFC;
+}
+
+.player-winner {
+    background-color: #152938;
+    color: #FCFCFC;
 }
 
 .active-player:before {
@@ -91,8 +101,4 @@
         letter-spacing: 5px;
         font-size: .8rem;
     }
-}
-
-.active-player .player-stats {
-    color: #FCFCFC;
 }

@@ -100,8 +100,10 @@ function Game(props) {
         setMoves(prevMoves => prevMoves + 1);
     }
 
-    function timerToggler() {
-        setIsTimerOn(prevTimerState => !prevTimerState);
+    function timerToggler() {/*singleplayer only */
+        if (players === '1') {
+            setIsTimerOn(prevTimerState => !prevTimerState);
+        }
     }
 
     function gameEndingCheck(tilesArray) {
@@ -133,6 +135,7 @@ function Game(props) {
         setIsTimerOn(false);
         setIsMobileMenuOpened(false);
         setMoves(0);
+        setPairs(0);
     }
 
     return (

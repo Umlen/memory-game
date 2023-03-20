@@ -30,6 +30,7 @@
 }
 @media (min-width: 700px) {
     .player-wrapper {
+        font-size: 1.125rem;
         padding: 20px;
         flex-direction: row;
         justify-content: space-between;
@@ -62,7 +63,7 @@
     .end-game-block {
         left: 60px;
         right: 60px;
-        padding: 50px 55px 70px;
+        padding: 50px 55px;
     }
 }
 @media (min-width: 1024px) {
