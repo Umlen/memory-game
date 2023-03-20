@@ -23,7 +23,7 @@ function Game(props) {
     
     useEffect(() => {
         setTiles(createTilesArray(theme, size));
-    }, []);
+    }, [theme, size]);
    
     useEffect(() => {
         function resizeWindowHandler() {

@@ -16,7 +16,7 @@ function MultiPlayer(props) {
             });
             setPlayersArr(newPlayersArr);
         }
-    }, [props.isGameStart]);
+    }, [props.isGameStart, props.players]);
 
     useEffect(function setPairsToPlayer() {
         if (props.pairs > 0) {
@@ -56,7 +56,7 @@ function MultiPlayer(props) {
             }
         }));
         setTurn(newTurn);
-    }, [props.moves]);
+    }, [props.moves, props.players]);
 
     return (
         <div className='players-container'>   
