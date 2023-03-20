@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../style/game.css';
+import '../style/player.css';
 import logo from '../images/dark-logo.svg';
 import createTilesArray from '../utils/createTilesArray';
 import Tiles from './Tiles';

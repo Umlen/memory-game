@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import '../style/singleplayer.css';
 import SinglePlayerEndGame from './SinglePlayerEndGame';
 
 function SinglePlayer(props) {
@@ -27,7 +26,7 @@ function SinglePlayer(props) {
     [props.timerState, props.isGameStart, timer]);
 
     return (
-        <div className='players-board'>
+        <div className='players-container'>
             {
                 props.isGameEnd && 
                 <SinglePlayerEndGame 
@@ -37,11 +36,11 @@ function SinglePlayer(props) {
                     restartGame={props.restartGame}
                 /> 
             }
-            <div className='player-wrapper'>
+            <div className='player-wrapper player-wrapper-single'>
                 <p>Timer</p>
                 <p className='player-stats'>{timer}</p>
             </div>
-            <div className='player-wrapper'>
+            <div className='player-wrapper player-wrapper-single'>
                 <p>Moves</p>
                 <p className='player-stats'>{props.moves}</p>
             </div>

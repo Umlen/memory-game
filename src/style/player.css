@@ -1,4 +1,4 @@
-.players-wrapper {
+.players-container {
     padding: 0 24px;
     margin-bottom: 25px;
     display: flex;
@@ -7,12 +7,12 @@
     gap: 24px;
 }
 @media(min-width: 700px) {
-    .players-wrapper {
+    .players-container {
         padding: 0 40px;
     }
 }
 @media(min-width: 1280px) {
-    .players-wrapper {
+    .players-container {
         padding: 0 165px;
         margin-bottom: 50px;
     }
@@ -24,6 +24,7 @@
     border-radius: 5px;
     padding: 10px 0;
     width: 100%;
+    max-width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,21 +34,37 @@
     .player-wrapper {
         font-size: 1.125rem;
         padding: 15px;
-        align-items: flex-start;
-    }
-}
-@media (min-width: 1024px) {
-    .player-wrapper {
-        padding: 20px 25px;
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
     }
 }
 
 .player-stats {
     font-size: 1.5rem;
     color: #304859;
+}
+
+/*Singleplayer Component*/
+
+@media (min-width: 700px) {
+    .player-wrapper-single {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/*Multiplayer Component*/
+
+@media (min-width: 700px) {
+    .player-wrapper-multi {
+        align-items: flex-start;
+    }
+}
+@media (min-width: 1024px) {
+    .player-wrapper-multi {
+        padding: 20px 25px;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
 
 .active-player {
@@ -100,5 +117,84 @@
         text-transform: uppercase;
         letter-spacing: 5px;
         font-size: .8rem;
+    }
+}
+
+/*End game component*/
+
+.end-game-block {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    right: 24px;
+    z-index: 20;
+    transform: translateY(-50%);
+    padding: 32px 24px 24px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #F2F2F2;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+@media (min-width: 700px) {
+    .end-game-block {
+        left: 60px;
+        right: 60px;
+        padding: 50px 55px;
+    }
+}
+@media (min-width: 1024px) {
+    .end-game-block {
+        left: 150px;
+        right: 150px;
+    }
+}
+@media (min-width: 1280px) {
+    .end-game-block {
+        left: 390px;
+        right: 390px;
+    }
+}
+
+.end-game-block .player-wrapper {
+    max-width: 100%;
+}
+
+.win-header {
+    color: #152938;
+    font-size: 1.5rem;
+}
+
+.win-subheader {
+    font-size: .875rem;
+}
+@media (min-width: 700px) {
+    .win-header {
+        font-size: 3rem;
+    }
+    .win-subheader {
+        font-size: 1.125rem;
+    }
+}
+
+.end-game-block .player-wrapper {
+    padding: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+@media (min-width: 700px) {
+    .buttons-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .buttons-wrapper .basic-button {
+        width: 100%;
     }
 }

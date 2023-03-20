@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import '../style/multiplayer.css';
 import MultiPlayerEndGame from './MultiPlayerEndGame';
 
 function MultiPlayer(props) {
@@ -60,7 +59,7 @@ function MultiPlayer(props) {
     }, [props.moves]);
 
     return (
-        <div className='players-wrapper'>   
+        <div className='players-container'>   
             { 
                 props.isGameEnd && 
                 <MultiPlayerEndGame 
@@ -73,7 +72,7 @@ function MultiPlayer(props) {
                 playersArr.map((player, key) => {
                     return (
                         <div 
-                            className={player.isTurn ? 'active-player player-wrapper' : 'player-wrapper'} 
+                            className={player.isTurn ? 'active-player player-wrapper player-wrapper-multi' : 'player-wrapper player-wrapper-multi'} 
                             id={player.id} 
                             key={key}>
                         <p>

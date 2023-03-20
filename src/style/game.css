@@ -63,7 +63,7 @@
     gap: 12px;
     aspect-ratio: 1;
 }
-@media(min-width: 700px) {
+@media(min-width: 500px) {
     .game-field {
         width: 75%;
     }

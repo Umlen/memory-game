@@ -1,5 +1,3 @@
-import '../style/singleplayer.css';
-
 function SinglePlayerEndGame(props) {
     return (
         <div className='blackout'>
