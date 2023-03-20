@@ -10,13 +10,14 @@ function SinglePlayer(props) {
     useEffect(    
         function timeCounting() {
             if (props.timerState) {
-                setTimeout(() => {
+                const timerId = setTimeout(() => {
                     const min = minutes + Math.floor((seconds + 1) / 60);
                     const sec = Math.round((seconds + 1) % 60);
                     setSeconds(sec);
                     setMinutes(min);
                     setTimer(`${min}:${sec < 10 ? '0' + sec : sec}`);
                 }, 1000);
+                return () => clearTimeout(timerId);
             } else if (!props.isGameStart && timer !== '0:00') {
                 setTimer('0:00');
                 setSeconds(0);
