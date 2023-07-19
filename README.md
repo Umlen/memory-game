@@ -8,7 +8,6 @@ This is a classic Memory Game. Users are able to play the game either solo or mu
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
   - [Links](#links)
-- [My process](#my-process)
   - [Built with](#built-with)
 - [Author](#author)
 
