@@ -1,6 +1,6 @@
-# Frontend Mentor - Memory game solution
+# Memory game
 
-This is a solution to the [Memory game challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/memory-game-vse4WFPvM). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a classic Memory Game. Users are able to play the game either solo or multiplayer, set the theme to use numbers or icons within the tiles, choose to play on either a 6x6 or 4x4 grid. 
 
 ## Table of contents
 
@@ -33,8 +33,6 @@ Users should be able to:
 
 - Solution URL: https://github.com/Umlen/memory-game
 - Live Site URL: https://prismatic-malasada-e29032.netlify.app/
-
-## My process
 
 ### Built with
 
