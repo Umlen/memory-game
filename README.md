@@ -31,7 +31,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: https://github.com/Umlen/memory-game
-- Live Site URL: https://prismatic-malasada-e29032.netlify.app/
+- Live Site URL: https://findpairsgame.netlify.app/
 
 ### Built with
 
